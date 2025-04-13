@@ -1,7 +1,7 @@
 package notes;
 
-import lombok.Data;
 
+import lombok.Data;
 
 @Data
 public class Note {
