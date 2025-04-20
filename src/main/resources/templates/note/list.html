@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All notes</title>
+</head>
+<body>
+<h1>Notes</h1>
+<ul>
+    <li th:each="note : ${notes}">
+        <a th:href="@{/note/edit(id=${note.id})}">Edit</a>
+        <a th:href="@{/note/view(id=${note.id})}">View</a>
+
+        <b th:text="${note.title}">Title</b> —
+        <span th:text="${note.content}">Content</span>
+    </li>
+</ul>
+</body>
+</html>
