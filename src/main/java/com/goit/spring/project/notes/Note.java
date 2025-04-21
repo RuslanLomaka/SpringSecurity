@@ -8,16 +8,17 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Note {
-
-    //Тут я так зрозумів, поки нема Гібернейт автогенерацію зробити не вийде
+    public Note() {
+    }
+    public Note(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
     long id;
-
     String title;
-
     String content;
     @Override
     public String toString(){
     return "Note{" + "id=" + id + ", title='" + title + '\'' + ", content='" + content + '\'' + '}';
     }
-
 }

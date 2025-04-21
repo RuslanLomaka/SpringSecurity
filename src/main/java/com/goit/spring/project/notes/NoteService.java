@@ -9,6 +9,7 @@ import java.util.List;
 // тут все поки що на заглушках
 @Service
 public class NoteService {
+    private long nextId = 1;
     private List<Note> notes = new ArrayList<>();
 
     public List<Note> listAll() {
@@ -16,6 +17,7 @@ public class NoteService {
     }
 
     void add(Note note) {
+        note.setId(nextId++);
         notes.add(note);
     }
 
@@ -41,17 +43,17 @@ public class NoteService {
         throw new NoteNotFoundException("Note with id [" + id + "] not found");
     }
 
-//    @Override
-//    public String toString() {
-//
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("Notes:\n");
-//        for (Note note : notes) {
-//            sb.append(note);
-//        }
-//        sb.append("\n");
-//        return sb.toString();
-//    }
+    @Override
+    public String toString() {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Notes:\n");
+        for (Note note : notes) {
+            sb.append(note);
+        }
+        sb.append("\n");
+        return sb.toString();
+    }
 }
 /*
 List<Note> listAll() - повертає список всіх нотаток

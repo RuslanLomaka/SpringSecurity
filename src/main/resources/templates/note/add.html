@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adding a note</title>
+</head>
+<body>
+<h1>Adding a note</h1>
+<form th:action="@{/note/add}" method="post">
+    <input type="text" name="title" placeholder="Title">
+    <input type="text" name="content" placeholder="Content">
+    <button type="submit">Add</button>
+</form>
+<a th:href="@{/note/list}">Back</a>
+</body>
+</html>
