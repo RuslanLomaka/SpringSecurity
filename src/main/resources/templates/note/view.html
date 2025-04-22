@@ -1,13 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <b th:text="${note.title}">Title</b> —
-    <span th:text="${note.content}">Content</span>
-    <br>
-    <a th:href="@{/note/list}">Back</a>
-</head>
-<body>
-
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{note/layout :: head}"></head>
+<body th:replace="~{note/layout :: layout}">
+<div th:fragment="content">
+    <div class="card mx-auto" style="max-width: 600px;">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${note.title}">Note Title</h5>
+            <p class="card-text" th:text="${note.content}">Note Content</p>
+        </div>
+        <div class="card-footer text-end">
+            <a th:href="@{/note/edit(id=${note.id})}" class="btn btn-sm btn-primary me-2">Edit</a>
+            <form th:action="@{/note/delete(id=${note.id})}" method="post" style="display: inline;">
+                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

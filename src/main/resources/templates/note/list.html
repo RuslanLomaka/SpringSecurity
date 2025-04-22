@@ -1,19 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>All notes</title>
-</head>
-<body>
-<h1>Notes</h1>
-<ul>
-    <li th:each="note : ${notes}">
-        <b th:text="${note.title}">Title</b> —
-        <span th:text="${note.content}">Content</span>
-        <a th:href="@{/note/edit(id=${note.id})}">Edit</a>
-        <a th:href="@{/note/view(id=${note.id})}">View</a>
-    </li>
-</ul>
-<a th:href="@{/note/add}">Write a new note</a>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{note/layout :: head}"></head>
+
+<body th:replace="~{note/layout :: layout}">
+
+<div th:fragment="content">
+
+    <!-- Page Container -->
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">All Notes</h2>
+
+        <!-- Responsive Grid: 1 col on xs, up to 5 on xl -->
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+
+            <!-- Loop over notes -->
+            <div class="col" th:each="note : ${notes}">
+                <div class="card h-100">
+                    <div class="card-body"
+                         th:onclick="'window.location.href=\'/note/view?id=' + ${note.id} + '\''"
+                         style="cursor: pointer;">
+                        <h5 class="card-title" th:text="${note.title}">Note title</h5>
+                        <p class="card-text" th:text="${#strings.abbreviate(note.content, 100)}">Note content</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
 </body>
 </html>

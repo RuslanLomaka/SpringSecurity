@@ -1,22 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit note</title>
-</head>
-<body>
-<body>
-<h1>Edit note</h1>
-<form th:action="@{/note/edit}" th:object="${note}" method="post">
-    <input type="hidden" th:field="*{id}"/>
-    <label>Title: <input type="text" th:field="*{title}"/></label><br/>
-    <label>Content: <textarea th:field="*{content}"></textarea></label><br/>
-    <button type="submit">Update</button>
-</form>
-
-<form th:action="@{/note/delete(id=${note.id})}" method="post">
-    <button type="submit">Delete</button>
-</form>
-</body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{note/layout :: head}"></head>
+<body th:replace="~{note/layout :: layout}">
+<div th:fragment="content">
+    <div class="card mx-auto p-4" style="max-width: 900px; min-height: 600px;">
+        <div class="card-body">
+            <h1 class="card-title mb-4">Editing</h1>
+            <form th:action="@{/note/edit}" th:object="${note}" method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input id="title" type="text" th:field="*{title}" class="form-control"/>
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">Content</label>
+                    <textarea id="content" th:field="*{content}" class="form-control" rows="20"></textarea>
+                </div>
+                <div class="d-flex justify-content-end gap-2 mt-3">
+                    <button type="submit" class="btn btn-primary w-100">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

@@ -17,7 +17,9 @@ public class NoteController {
     @RequestMapping(value = "/note/list", method = RequestMethod.GET)
     public ModelAndView getListOfNotes() {
         ModelAndView result = new ModelAndView("note/list");
+        result.addObject("pageTitle", "All notes");
         result.addObject("notes", noteService.listAll());
+        result.addObject("showBackToList", false);
         return result;
     }
 
@@ -25,15 +27,20 @@ public class NoteController {
     public ModelAndView getAddNotePage(Long id) {
         ModelAndView result = new ModelAndView("note/view");
         Note note = noteService.getById(id);
+        result.addObject("pageTitle", note.getTitle());
         result.addObject("note", note);
+        result.addObject("showBackToList", true);
         return result;
     }
 
     @RequestMapping(value = "/note/add", method = RequestMethod.GET)
     public ModelAndView getAddNotePage() {
         ModelAndView result = new ModelAndView("note/add");
+        result.addObject("pageTitle", "Add note");
+        result.addObject("showBackToList", true);
         return result;
     }
+
     @PostMapping("/note/add")
     public RedirectView saveNote(@ModelAttribute Note note) {
         noteService.add(note);
@@ -45,6 +52,8 @@ public class NoteController {
         ModelAndView result = new ModelAndView("note/edit");
         Note note = noteService.getById(id);
         result.addObject("note", note);
+        result.addObject("pageTitle", "Edit note");
+        result.addObject("showBackToList", true);
         return result;
     }
 
@@ -56,6 +65,7 @@ public class NoteController {
         noteService.update(note);
         return "redirect:/note/list";
     }
+
     @PostMapping("/note/delete")
     public String deleteNote(@RequestParam(name = "id") Long id) {
         noteService.deleteById(id);

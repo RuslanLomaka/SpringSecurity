@@ -1,16 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Adding a note</title>
-</head>
-<body>
-<h1>Adding a note</h1>
-<form th:action="@{/note/add}" method="post">
-    <input type="text" name="title" placeholder="Title">
-    <input type="text" name="content" placeholder="Content">
-    <button type="submit">Add</button>
-</form>
-<a th:href="@{/note/list}">Back</a>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{note/layout :: head}"></head>
+<body th:replace="~{note/layout :: layout}">
+<div th:fragment="content">
+    <div class="card mx-auto p-4" style="max-width: 700px; min-height: 400px;">
+        <div class="card-body">
+            <h1 class="card-title mb-4 text-center">Add a New Note</h1>
+
+            <form th:action="@{/note/add}" method="post">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input id="title" type="text" name="title" class="form-control" placeholder="Enter note title">
+                </div>
+
+                <div class="mb-3">
+                    <label for="content" class="form-label">Content</label>
+                    <textarea id="content" name="content" class="form-control" rows="5"
+                              placeholder="Enter note content"></textarea>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary w-100">Add Note</button>
+                </div>
+            </form>
+
+
+        </div>
+
+    </div>
+   </div>
 </body>
 </html>
