@@ -1,24 +1,32 @@
 package com.goit.spring.project.notes;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
+@Entity
+@Table(name = "note")
 @AllArgsConstructor
-@Setter
+@NoArgsConstructor
 @Getter
+@Setter
 public class Note {
-    public Note() {
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    private String title;
+    @Column(columnDefinition = "TEXT")
+    private String content;
+
     public Note(String title, String content) {
         this.title = title;
         this.content = content;
     }
-    long id;
-    String title;
-    String content;
+
     @Override
-    public String toString(){
-    return "Note{" + "id=" + id + ", title='" + title + '\'' + ", content='" + content + '\'' + '}';
+    public String toString() {
+        return "Note{" + "id=" + id + ", title='" + title + '\'' + ", content='" + content + '\'' + '}';
     }
+
+
 }

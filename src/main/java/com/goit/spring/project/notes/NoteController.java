@@ -4,13 +4,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 public class NoteController {
 
-    private final NoteService noteService;
+    private final NoteServiceInterface noteService;
 
-    public NoteController(NoteService noteService) {
+    public NoteController(NoteServiceInterface noteService) {
         this.noteService = noteService;
     }
 
@@ -18,7 +20,10 @@ public class NoteController {
     public ModelAndView getListOfNotes() {
         ModelAndView result = new ModelAndView("note/list");
         result.addObject("pageTitle", "All notes");
-        result.addObject("notes", noteService.listAll());
+        List<Note> reversedList = noteService.listAll();
+        Collections.reverse(reversedList);
+        result.addObject("notes", reversedList);
+
         result.addObject("showBackToList", false);
         return result;
     }

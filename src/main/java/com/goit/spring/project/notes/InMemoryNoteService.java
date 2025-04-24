@@ -6,8 +6,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 @Service
-public class NoteService {
+public class InMemoryNoteService implements NoteServiceInterface{
+
+
     private long nextId = 1;
     private final List<Note> notes = new ArrayList<>();
 
@@ -15,12 +19,12 @@ public class NoteService {
         return notes;
     }
 
-    void add(Note note) {
+    public void add(Note note) {
         note.setId(nextId++);
         notes.add(note);
     }
 
-    void deleteById(long id) {
+    public void deleteById(long id) {
         notes.removeIf(note -> note.getId() == id);
     }
 
@@ -33,7 +37,7 @@ public class NoteService {
         }
     }
 
-    Note getById(long id) {
+   public  Note getById(long id) {
         for (Note note : notes) {
             if (note.getId() == id) {
                 return note;
