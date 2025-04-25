@@ -5,9 +5,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TestNoteLoader implements CommandLineRunner {
-    private final NoteServiceInterface noteService;
+    private final NoteService noteService;
 
-    public TestNoteLoader(NoteServiceInterface noteService) {
+    public TestNoteLoader(NoteService noteService) {
         this.noteService = noteService;
     }
 
@@ -304,9 +304,6 @@ public class TestNoteLoader implements CommandLineRunner {
                 "Commit message: ‘Final fix. No more bugs. Seriously.’ App crashes immediately after deployment. Classic."
         ));
 
-
         System.out.println("Project documentation notes loaded.");
     }
-
-
 }

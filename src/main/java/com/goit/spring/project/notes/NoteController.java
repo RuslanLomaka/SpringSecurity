@@ -1,18 +1,22 @@
 package com.goit.spring.project.notes;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 import java.util.Collections;
 import java.util.List;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class NoteController {
 
-    private final NoteServiceInterface noteService;
+    private final NoteService noteService;
 
-    public NoteController(NoteServiceInterface noteService) {
+    public NoteController(NoteService noteService) {
         this.noteService = noteService;
     }
 
@@ -63,9 +67,7 @@ public class NoteController {
     }
 
     @RequestMapping(value = "/note/edit", method = RequestMethod.POST)
-    public String updateNote(@RequestParam(name = "id") Long id,
-                             @RequestParam(name = "title") String title,
-                             @RequestParam(name = "content") String content) {
+    public String updateNote(@RequestParam(name = "id") Long id, @RequestParam(name = "title") String title, @RequestParam(name = "content") String content) {
         Note note = new Note(id, title, content);
         noteService.update(note);
         return "redirect:/note/list";

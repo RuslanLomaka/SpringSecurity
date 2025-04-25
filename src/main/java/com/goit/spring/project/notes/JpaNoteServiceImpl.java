@@ -3,15 +3,15 @@ package com.goit.spring.project.notes;
 import com.goit.spring.project.exceptions.NoteNotFoundException;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
 @Primary
 @Service
-public class JpaNoteService implements NoteServiceInterface {
+public class JpaNoteServiceImpl implements NoteService {
 
     private final NoteRepository noteRepository;
 
-    public JpaNoteService(NoteRepository noteRepository) {
+    public JpaNoteServiceImpl(NoteRepository noteRepository) {
         this.noteRepository = noteRepository;
     }
 
