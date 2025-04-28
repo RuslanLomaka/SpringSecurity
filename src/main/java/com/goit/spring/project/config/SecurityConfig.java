@@ -1,10 +1,7 @@
-// Пакет, у якому знаходиться цей клас конфігурації
 package com.goit.spring.project.config;
 
-// Імпортуємо DataSource — об'єкт, який дає доступ до бази даних через JDBC
 import javax.sql.DataSource;
 
-// Імпортуємо анотації та класи Spring
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -12,26 +9,26 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
-// Позначаємо, що цей клас є конфігураційним — Spring буде створювати @Bean-и на основі нього
+// Marks this class as a configuration class — Spring will create @Beans based on it
 @Configuration
 
-// Активуємо механізми Spring Security у цьому проєкті
+// Enables Spring Security mechanisms in the project
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // Створюємо @Bean, який відповідає за зчитування користувачів з бази через JDBC
+    // Defines a @Bean for reading users from the database via JDBC
     @Bean
     public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource) {
-        // Створюємо новий JdbcUserDetailsManager і передаємо йому DataSource (підключення до бази даних)
-        // Він буде використовувати таблиці users та authorities для пошуку користувачів та ролей
+        // Creates a new JdbcUserDetailsManager and passes it the DataSource (connection to database)
+        // It will use the "users" and "authorities" tables to find users and their roles
         return new JdbcUserDetailsManager(dataSource);
     }
 
-    // Створюємо @Bean для шифрування паролів
+    // Defines a @Bean for password encryption
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // Використовуємо BCryptPasswordEncoder — безпечний алгоритм шифрування паролів
-        // За замовченням використовується work factor 10 (2^10 ітерацій хешування)
-        return new BCryptPasswordEncoder(31);
+        // Uses BCryptPasswordEncoder — a safe password hashing algorithm
+        // Sets a work factor of 14 (2^14 hashing rounds) for increased security
+        return new BCryptPasswordEncoder(14);
     }
 }
